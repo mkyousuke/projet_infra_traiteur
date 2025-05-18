@@ -2,11 +2,649 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Chez le traiteur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ynough Traiteur - Saveurs d'Exception pour Vos Événements</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif; 
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; 
+            color: #333;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 2rem; 
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-family: 'Times New Roman', Times, serif; 
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d97706; 
+            text-decoration: none;
+        }
+
+        nav.main-nav a { 
+            margin-left: 1.5rem;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav.main-nav a:hover {
+            color: #d97706; 
+        }
+        
+        .mobile-menu-button {
+            display: none; 
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-menu-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mobile-nav {
+            display: none; 
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .mobile-nav a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+        .mobile-nav a:hover {
+            background-color: #fef3c7; 
+            color: #d97706;
+        }
+        .mobile-nav.open { 
+            display: block;
+        }
+
+
+        #accueil {
+            background-color: #fffbeb; 
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
+
+        #accueil .hero-content {
+            background-color: rgba(0, 0, 0, 0.75);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            display: inline-block;
+            max-width: 700px; 
+            margin: auto;
+        }
+
+        #accueil h1 {
+            font-family: 'Times New Roman', Times, serif; 
+            font-size: 2.5rem; 
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        #accueil p {
+            font-size: 1.1rem;
+            color: #e5e7eb; 
+            margin-bottom: 2rem;
+        }
+
+        #accueil .cta-button {
+            background-color: #f59e0b; 
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+        #accueil .cta-button:hover {
+            background-color: #d97706; 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        section {
+            padding: 3rem 1.5rem; 
+        }
+        section h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            margin-bottom: 2.5rem;
+        }
+
+        #services .services-grid {
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+        #services .service-card {
+            background-color: #f9fafb; 
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+            flex-basis: 300px; 
+            flex-grow: 1; 
+            max-width: 350px;
+        }
+        #services .service-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        #services .service-card img { 
+            margin: 0 auto 1rem auto;
+            border-radius: 50%; 
+            width: 80px; 
+            height: 80px;
+            object-fit: cover; 
+            background-color: #fbbf24; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em; 
+        }
+        #services .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #b45309; 
+            margin-bottom: 0.5rem;
+        }
+
+        #menus {
+            background-color: #fffbeb; 
+        }
+        #menus .menus-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        #menus .menu-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden; 
+            flex-basis: 320px;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+        #menus .menu-card img.menu-image { 
+            width: 100%;
+            height: 200px;
+            object-fit: cover; 
+            display: block; 
+        }
+        #menus .menu-card .menu-content {
+            padding: 1.5rem;
+        }
+        #menus .menu-card h3 {
+            font-size: 1.6rem;
+            color: #b45309;
+            margin-bottom: 0.75rem;
+        }
+        #menus .menu-card p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        #menus .menu-card a.menu-link {
+            color: #d97706;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        #menus .menu-card a.menu-link:hover {
+            text-decoration: underline;
+        }
+        #menus .menu-cta-button { 
+            display: block;
+            width: fit-content;
+            margin: 2.5rem auto 0 auto; 
+            background-color: #f59e0b;
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        #menus .menu-cta-button:hover {
+            background-color: #d97706;
+        }
+
+        #galerie .gallery-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 1rem;
+        }
+        #galerie .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        #galerie .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        #contact {
+            background-color: #fffbeb; 
+        }
+        #contact .contact-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        #contact .contact-form-container p.contact-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        #contact form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        #contact form input[type="text"],
+        #contact form input[type="email"],
+        #contact form input[type="tel"],
+        #contact form select,
+        #contact form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; 
+            transition: border-color 0.3s ease-in-out;
+        }
+        #contact form input[type="text"]:focus,
+        #contact form input[type="email"]:focus,
+        #contact form input[type="tel"]:focus,
+        #contact form select:focus,
+        #contact form textarea:focus {
+            border-color: #f59e0b;
+            outline: none; 
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3); 
+        }
+        #contact form button[type="submit"] {
+            display: block;
+            width: 100%;
+            background-color: #f59e0b;
+            color: white;
+            font-weight: bold;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+        #contact form button[type="submit"]:hover {
+            background-color: #d97706;
+        }
+        #contact .form-message { 
+            margin-top: 1rem;
+            text-align: center;
+            min-height: 1.5em; 
+        }
+           #contact .contact-direct {
+            margin-top: 2rem;
+            text-align: center;
+            color: #555;
+        }
+        #contact .contact-direct p {
+            margin-bottom: 0.5rem;
+        }
+        #contact .contact-direct strong {
+            color: #333;
+        }
+        #contact .contact-direct a {
+            color: #d97706;
+            text-decoration: none;
+        }
+        #contact .contact-direct a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #343a40; 
+            color: #adb5bd; 
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+        footer .logo-footer {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #f59e0b; 
+            text-decoration: none;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        footer p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        footer .social-links a {
+            margin: 0 0.5rem;
+            color: #ced4da; 
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer .social-links a:hover {
+            color: #ffffff;
+        }
+        footer .social-links svg { 
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        footer .copyright {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column; 
+            }
+            header .logo {
+                margin-bottom: 0.5rem;
+            }
+            nav.main-nav {
+                display: none; 
+            }
+            .mobile-menu-button {
+                display: block; 
+            }
+
+            #services .services-grid,
+            #menus .menus-grid {
+                flex-direction: column; 
+                align-items: center; 
+            }
+                #services .service-card,
+                #menus .menu-card {
+                flex-basis: 100%; 
+                max-width: 500px; 
+            }
+
+            #contact form .form-grid-cols-2 { 
+                display: block; 
+            }
+                #contact form .form-grid-cols-2 > div {
+                margin-bottom: 1rem; 
+            }
+                #contact form .form-grid-cols-2 > div:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Bienvenue chez le traiteur Ynough, un traiteur d'exception</h1>
-    <p>Nous proposons des plats gastronomiques pour tous vos événements !</p>
-    <p>Contactez-nous à : contact@traiteur-ynough.local</p>
+
+    <header>
+        <a href="#accueil" class="logo">Ynough</a>
+        <nav class="main-nav" aria-label="Menu principal">
+            <a href="#accueil">Accueil</a>
+            <a href="#services">Nos Services</a>
+            <a href="#menus">Nos Menus</a>
+            <a href="#galerie">Galerie</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button id="mobileMenuButton" class="mobile-menu-button" aria-controls="mobileNav" aria-expanded="false">
+            <span class="sr-only">Ouvrir le menu principal</span>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </header>
+    <nav id="mobileNav" class="mobile-nav" role="navigation" aria-label="Menu mobile">
+        <a href="#accueil" role="menuitem">Accueil</a>
+        <a href="#services" role="menuitem">Nos Services</a>
+        <a href="#menus" role="menuitem">Nos Menus</a>
+        <a href="#galerie" role="menuitem">Galerie</a>
+        <a href="#contact" role="menuitem">Contact</a>
+    </nav>
+
+    <main>
+        <section id="accueil" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">Ynough Traiteur</h1>
+                <p>L'art de la gastronomie française pour des moments inoubliables.</p>
+                <a href="#contact" class="cta-button">Demander un Devis</a>
+            </div>
+        </section>
+
+        <section id="services" aria-labelledby="services-heading">
+            <h2 id="services-heading">Nos Services de Traiteur</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://placehold.co/100x100/FBBF24/FFFFFF?text=🍽️" alt="Icône de plat pour Mariages et Réceptions">
+                    <h3>Mariages & Réceptions</h3>
+                    <p>Des menus sur mesure pour célébrer le plus beau jour de votre vie avec élégance et raffinement.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://placehold.co/100x100/FBBF24/FFFFFF?text=🥂" alt="Icône de verres pour Événements d'Entreprise">
+                    <h3>Événements d'Entreprise</h3>
+                    <p>Cocktails, déjeuners d'affaires, séminaires... Impressionnez vos collaborateurs et clients.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://placehold.co/100x100/FBBF24/FFFFFF?text=🎂" alt="Icône de gâteau pour Célébrations Privées">
+                    <h3>Célébrations Privées</h3>
+                    <p>Anniversaires, baptêmes, fêtes de famille... Nous créons l'ambiance gourmande de vos événements.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="menus" aria-labelledby="menus-heading">
+            <h2 id="menus-heading">Découvrez Nos Menus</h2>
+            <div class="menus-grid">
+                <div class="menu-card">
+                    <img src="https://placehold.co/600x400/FFEBCD/333333?text=Menu+Prestige" alt="Image de Plat du Menu Prestige" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Menu Prestige</h3>
+                        <p>Une sélection de nos plats les plus raffinés, alliant tradition et modernité.</p>
+                        <a href="#contact" class="menu-link">En savoir plus &rarr;</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://placehold.co/600x400/FFF0E1/333333?text=Buffet+Convivial" alt="Image de Buffet Convivial" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Buffet Convivial</h3>
+                        <p>Un assortiment généreux et varié, parfait pour une ambiance chaleureuse et décontractée.</p>
+                        <a href="#contact" class="menu-link">En savoir plus &rarr;</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://placehold.co/600x400/FFFAF0/333333?text=Cocktail+Dînatoire" alt="Image de Pièces de Cocktail Dînatoire" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Cocktail Dînatoire</h3>
+                        <p>Des bouchées créatives et savoureuses pour vos réceptions et événements networking.</p>
+                        <a href="#contact" class="menu-link">En savoir plus &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;"> <a href="#contact" class="menu-cta-button">Composer Votre Menu Idéal</a>
+            </div>
+        </section>
+
+        <section id="galerie" aria-labelledby="gallery-heading">
+            <h2 id="gallery-heading">Notre Savoir-Faire en Images</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFF5E1/333333?text=Plat+Gourmet+1" alt="Image de Plat Gourmet 1"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFEBCD/333333?text=Décoration+Événement" alt="Image de Décoration Événement"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFF0E1/333333?text=Buffet+Varié" alt="Image de Buffet Varié"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFFAF0/333333?text=Pièce+Montée" alt="Image de Pièce Montée"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFF5E1/333333?text=Amuse-bouches" alt="Image d'Amuse-bouches"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFEBCD/333333?text=Table+Dressée" alt="Image de Table Dressée"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFF0E1/333333?text=Service+Traiteur" alt="Image de Service Traiteur"></div>
+                <div class="gallery-item"><img src="https://placehold.co/400x400/FFFAF0/333333?text=Détail+Culinaire" alt="Image de Détail Culinaire"></div>
+            </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-heading">
+                <h2 id="contact-heading">Contactez-Nous</h2>
+            <div class="contact-form-container">
+                <p class="contact-intro">Pour toute demande de devis ou d'information, n'hésitez pas à nous contacter. Nous serons ravis de discuter de votre projet.</p>
+                <form id="contactForm">
+                    <div class="form-grid-cols-2" style="display: flex; gap: 1rem; margin-bottom:1rem;"> <div style="flex: 1;">
+                            <label for="nom">Nom Complet</label>
+                            <input type="text" id="nom" name="nom" required aria-required="true">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="email">Adresse Email</label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="telephone">Téléphone (Optionnel)</label>
+                        <input type="tel" id="telephone" name="telephone">
+                    </div>
+                    <div>
+                        <label for="type_evenement">Type d'événement</label>
+                        <select id="type_evenement" name="type_evenement">
+                            <option value="">Sélectionnez un type</option>
+                            <option value="mariage">Mariage</option>
+                            <option value="entreprise">Événement d'entreprise</option>
+                            <option value="anniversaire">Anniversaire</option>
+                            <option value="autre">Autre (précisez dans le message)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message">Votre Message</label>
+                        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit">Envoyer le Message</button>
+                    </div>
+                </form>
+                <div id="formMessage" class="form-message" aria-live="polite"></div>
+                    <div class="contact-direct">
+                    <p style="font-size: 1.1em;">Ou contactez-nous directement :</p>
+                    <p><strong>Téléphone :</strong> <a href="tel:+33123456789">01 23 45 67 89</a></p>
+                    <p><strong>Email :</strong> <a href="mailto:contact@ynough-traiteur.fr">contact@ynough-traiteur.fr</a></p>
+                    <p><strong>Adresse :</strong> 123 Rue de la Gastronomie, 75000 Paris</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#accueil" class="logo-footer">Ynough</a>
+        <p>Passion, saveur et créativité au service de vos événements.</p>
+        <div class="social-links" style="margin-bottom: 1rem;">
+            <a href="#" aria-label="Suivez-nous sur Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+            </a>
+            <a href="#" aria-label="Suivez-nous sur Twitter">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+            </a>
+            <a href="#" aria-label="Suivez-nous sur Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363.416 2.427.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.023.047 1.351.058 3.807.058h.468c2.456 0 2.784-.011 3.807-.058.975-.045 1.504.207 1.857.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748 1.15.137-.353.3-.882-.344-1.857.047-1.023.058-1.351-.058-3.807v-.468c0-2.456-.011-2.784-.058-3.807-.045-.975-.207-1.504-.344-1.857-.182-.467-.399-.8-.748-1.15-.35-.35-.683-.566-1.15-.748-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg>
+            </a>
+        </div>
+        <p class="copyright">&copy; <span id="currentYear"></span> Ynough Traiteur. Tous droits réservés.</p>
+        <p style="font-size: 0.75rem; margin-top: 0.5rem;">Site conçu avec amour 🇫🇷</p>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav'); 
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileNav.classList.toggle('open');
+            mobileMenuButton.setAttribute('aria-expanded', isOpen);
+            
+            if (isOpen) {
+                mobileMenuButton.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span class="sr-only">Fermer le menu principal</span>`;
+            } else {
+                mobileMenuButton.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                    <span class="sr-only">Ouvrir le menu principal</span>`;
+            }
+        });
+
+        const mobileNavLinks = mobileNav.querySelectorAll('a[role="menuitem"]');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => { 
+                mobileNav.classList.remove('open');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                mobileMenuButton.innerHTML = `
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                    <span class="sr-only">Ouvrir le menu principal</span>`;
+            });
+        });
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        if(contactForm) { 
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+
+                const nom = document.getElementById('nom').value;
+                const email = document.getElementById('email').value;
+                const messageText = document.getElementById('message').value;
+
+                if (nom && email && messageText) {
+                    formMessage.innerHTML = '<p style="color: green; font-weight: bold;">Merci ! Votre message a été envoyé avec succès. Nous vous recontacterons bientôt.</p>';
+                    contactForm.reset(); 
+                } else {
+                    formMessage.innerHTML = '<p style="color: red; font-weight: bold;">Veuillez remplir tous les champs obligatoires.</p>';
+                }
+
+                setTimeout(() => {
+                    formMessage.innerHTML = '';
+                }, 5000);
+            });
+        }
+    </script>
+
 </body>
 </html>
